@@ -23,9 +23,13 @@ df["embedding"] = embeddings.tolist()
 
 conn = psycopg.connect(
     host="localhost",
+    port=5433,
     dbname="semantic_search",
-    user="aditiagarwal"
+    user="aditiagarwal",
+    password="semantic_password"
 )
+
+print("Connected to PostgreSQL")
 
 cur = conn.cursor()
 
@@ -57,7 +61,10 @@ for _, row in df.iterrows():
         
 conn.commit()
 
-print("✅ All products inserted successfully!")
+cur.execute("SELECT COUNT(*) FROM products;")
+count = cur.fetchone()[0]
+
+print(f"✅ Products currently in database: {count}")
 
 cur.close()
 conn.close()

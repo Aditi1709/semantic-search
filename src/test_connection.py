@@ -2,9 +2,12 @@ import psycopg
 
 conn = psycopg.connect(
     host="localhost",
+    port=5433,
     dbname="semantic_search",
-    user="aditiagarwal"
+    user="aditiagarwal",
+    password="semantic_password"
 )
 
-print("✅ Connected successfully!")
+print("✅ Connected to Docker PostgreSQL!")
+
 conn.close()
